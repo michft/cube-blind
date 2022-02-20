@@ -1,0 +1,38 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-executables-have-shebangs
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: check-toml
+      - id: check-yaml
+        # cloudformation checked by cfn-lint, yaml linter does not understand !Ref
+        exclude: cdk-config/.*/cfn.*yml
+      - id: debug-statements
+      - id: destroyed-symlinks
+      - id: detect-aws-credentials
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: name-tests-test
+      - id: no-commit-to-branch
+      - id: requirements-txt-fixer
+      - id: trailing-whitespace
+
+  # - repo: https://github.com/awslabs/cfn-python-lint
+  #   rev: v0.15.0 # The version of cfn-lint to use
+  #   hooks:
+  #     - id: cfn-python-lint
+  #       files: ssm-documents/.*\.(json|yml|yaml)$
+
+  - repo: https://github.com/aws-cloudformation/cfn-lint
+    rev: v0.58.0
+    hooks:
+      - id: cfn-python-lint
+        files:  cdk-config/.*/cfn.*yml
